@@ -1,0 +1,67 @@
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
+
+    <profiles>
+        <profile>
+            <id>backbase</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <repositories>
+            <repository>
+                <id>Backbase Artifact Repository</id>
+                <url>https://repo.backbase.com/repo/</url>
+            </repository>
+            <repository>
+                <id>artifacts.backbase.com</id>
+                <url>https://artifacts.backbase.com/repo/</url>
+            </repository>
+            <repository>
+                <id>artifacts.backbase.com-releases</id>
+                <url>https://artifacts.backbase.com/backbase-ps-releases</url>
+            </repository>
+            <repository>
+                <id>artifacts.backbase.com-snapshots</id>
+                <url>https://artifacts.backbase.com/backbase-ps-snapshots</url>
+            </repository>
+            </repositories>
+            <pluginRepositories>
+                <pluginRepository>
+                    <id>Backbase Artifact Repository</id>
+                    <url>https://repo.backbase.com/repo/</url>
+                </pluginRepository>
+            </pluginRepositories>
+        </profile>
+    </profiles>
+    <servers>
+        <server>
+            <id>Backbase Artifact Repository</id>
+            <username>marcos</username>
+            <password>xxxxxxxxx</password>
+            <!--<username>$REPLACE_WITH_VALID_USERNAME</username>-->
+            <!--<password>$REPLACE_WITH_VALID_PASSWORD</password>-->
+        </server>
+        <server>
+            <id>artifacts.backbase.com-releases</id>
+            <username>marcos</username>
+            <password>xxxxxxxxx</password>
+            <!--<username>$REPLACE_WITH_VALID_USERNAME</username>-->
+            <!--<password>$REPLACE_WITH_VALID_PASSWORD</password>-->
+        </server>
+        <server>
+            <id>artifacts.backbase.com-snapshots</id>
+            <username>marcos</username>
+            <password>xxxxxxxxx</password>
+            <!--<username>$REPLACE_WITH_VALID_USERNAME</username>-->
+            <!--<password>$REPLACE_WITH_VALID_PASSWORD</password>-->
+        </server>
+        <server>
+            <id>artifacts.backbase.com</id>
+            <username>marcos</username>
+            <password>xxxxxxxxx</password>
+            <!--<username>$REPLACE_WITH_VALID_USERNAME</username>-->
+            <!--<password>$REPLACE_WITH_VALID_PASSWORD</password>-->
+        </server>
+    </servers>
+</settings>
