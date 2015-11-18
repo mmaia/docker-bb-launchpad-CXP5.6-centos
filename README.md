@@ -1,22 +1,24 @@
-# docker-bb-launchpad-CXP5.6-centos
-Dockerfile that creates a functional version of BackBase launchpad CXP5.6 running on CentOS 6.x or 7.x. All dependencies are packaged in the same docker host so this is most targeted to development environments as good practices recommend that each process should be deployed in it's own docker container.
+## docker-bb-launchpad-CXP5.6
 
-Note: Running this docker file requires access to a Backbase portal software which requires a license.
+Dockerfile that creates a functional version of BackBase launchpad CXP5.6 running on CentOS 6.x or 7.x. 
+All dependencies are packaged in the same docker host so this is most targeted to development environments as good practices recommend that each process should be deployed in it's own docker container.
 
-checkout this project code.
-Make sure you have docker installed and configured.
+**Note:** Running this docker file requires access to a Backbase portal software which requires a license.
 
-build an image using this docker file:
+* Clone this project code.
 
-docker build -t mmaia/docker_bb_launchpad_cxp56:v0.1 .
+* Make sure you have docker installed and configured.
 
-check if the new image is there: 
+* Build an image using this docker file:
+`docker build -t mmaia/docker_bb_launchpad_cxp56:v0.1 . 
 
-docker images
+* Check if the new image is there: 
 
-start the docker container for the first time(create and name the container):
+`docker images`
 
-docker run -i -t -p 7777:7777 --name bb_portal_cxp56 mmaia/docker_bb_launchpad_cxp56:v0.1 /bin/bash
+* Start the docker container for the first time(create and name the container):
+
+`docker run -i -t -p 7777:7777 --name bb_portal_cxp56 mmaia/docker_bb_launchpad_cxp56:v0.1 /bin/bash`
 
 after the first time you can jus start the created container using it's given name:
 

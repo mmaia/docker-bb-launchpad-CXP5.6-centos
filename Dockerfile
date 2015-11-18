@@ -46,15 +46,15 @@ LABEL com.backbase.vendor="Backbase BV" \
 version="beta-01" \
 description="This is a basic Backbase Portal Server implementation container to be used for training and development pourposes only."
 
-#------ update and clean and install required utility tools
-RUN apt-get update \
-&& apt-get clean \
-&& apt-get install -y \
+#------ update, install and clean required utility tools
+RUN  apt-get update && apt-get install -y \
 git \
 unzip \
 wget \
 nodejs \
-npm
+npm \
+&& apt-get clean \
+&& rm -rf /var/lib/apt/lists/*
 
 #---- install some global package dependencies with npm
 RUN npm install -g \
@@ -79,35 +79,51 @@ ENV PATH=$PATH:/opt/apache-maven-3.3.3/bin:/opt/jdk1.7.0_79/bin \
 JAVA_HOME=/opt/jdk1.7.0_79 \
 MAVEN_OPTS="-Xmx512m -XX:MaxPermSize=256m -XX:+UseConcMarkSweepGC"
 
-#---- updates maven configuration file to include backbase repository
+#---- updates maven configuration file to include backbase repository to the root user
 ADD settings.xml /root/.m2/
+
+#---- updates maven configuration file to include backbase repository to bbportal user that will be created...
+ADD settings.xml /home/bbportal/.m2/
+
+WORKDIR /home/bbportal/.m2
+
+RUN mkdir repository
+
+WORKDIR /opt
 
 RUN mvn archetype:generate -DarchetypeGroupId=com.backbase.launchpad -DarchetypeArtifactId=launchpad-archetype-CXP5.6 \
 -DarchetypeVersion=1.1.0 -DgroupId=com.bbportal.training -DartifactId=bbPortalTraining -Dversion=1.0 \
--Dpackage=com.bbportal.training -Dlaunchpad-version=1.1.0
-
-#--- creates user and group O.S
-#RUN adduser bbportal
-#USER bbportal:bbportal
+-Dpackage=com.bbportal.training -Dlaunchpad-version=0.13.1 -Dlaunchpad-edition=universal
 
 #---- making sure permissions are ok
 RUN chmod -R 755 /opt
 
+#--- creates user and group O.S
+RUN groupadd -r bbportal
+RUN useradd -g bbportal -d /home/bbportal -m -p bbportal -c "Backbase portal user" -r bbportal
+RUN chown -R bbportal:bbportal /home/bbportal
+RUN chmod -R 755 /home/bbportal
+RUN chown -R bbportal:bbportal /opt/bbPortalTraining
+
 WORKDIR /opt/bbPortalTraining
 
-RUN mvn clean install -Dnpm-install -Pclean-database
+# change container user to be bbportal from now on...
+USER bbportal
+
+RUN mvn clean install -Pclean-database
+#RUN mvn clean install -Dnpm-install -Pclean-database
 
 #----- expose portal port, cms port,
-EXPOSE 7777
+EXPOSE 7777 8080
 
 #---- define mount points in image that can be mapped to external file system when necessary
-VOLUME ["/opt/bbPortalTraining/services"
+#VOLUME ["/opt/bbPortalTraining/services"]
 
 #---- this is a workaround to make sure the contents of services folder that will be mapped as a volume will not overlay
 # the files inside it and they will be present before the next command...
 # //TODO - find a solution to fix this problem with the mapped services folder. What happens is that once we do the
-# //TODO - volume mapping on the run commmand, the host os filesystem ovelays the services folder and the files in it
+# //TODO - volume mapping on the run commmand, the host os filesystem overlays the services folder and the files in it
 # //TODO - are not available.
 
 #--- start the portal when container starts
-CMD ["/opt/bbPortalTraining/webapps/portalserver/run.sh"]
+# CMD ["sh", "/opt/bbPortalTraining/webapps/portalserver/run.sh", "-b"]

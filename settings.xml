@@ -37,31 +37,23 @@
     <servers>
         <server>
             <id>Backbase Artifact Repository</id>
-            <username>marcos</username>
-            <password>xxxxxxxxx</password>
-            <!--<username>$REPLACE_WITH_VALID_USERNAME</username>-->
-            <!--<password>$REPLACE_WITH_VALID_PASSWORD</password>-->
+            <username>$REPLACE_WITH_VALID_USERNAME</username>
+            <password>$REPLACE_WITH_VALID_PASSWORD</password>
         </server>
         <server>
             <id>artifacts.backbase.com-releases</id>
-            <username>marcos</username>
-            <password>xxxxxxxxx</password>
-            <!--<username>$REPLACE_WITH_VALID_USERNAME</username>-->
-            <!--<password>$REPLACE_WITH_VALID_PASSWORD</password>-->
+            <username>$REPLACE_WITH_VALID_USERNAME</username>
+            <password>$REPLACE_WITH_VALID_PASSWORD</password>
         </server>
         <server>
             <id>artifacts.backbase.com-snapshots</id>
-            <username>marcos</username>
-            <password>xxxxxxxxx</password>
-            <!--<username>$REPLACE_WITH_VALID_USERNAME</username>-->
-            <!--<password>$REPLACE_WITH_VALID_PASSWORD</password>-->
+            <username>$REPLACE_WITH_VALID_USERNAME</username>
+            <password>$REPLACE_WITH_VALID_PASSWORD</password>
         </server>
         <server>
             <id>artifacts.backbase.com</id>
-            <username>marcos</username>
-            <password>xxxxxxxxx</password>
-            <!--<username>$REPLACE_WITH_VALID_USERNAME</username>-->
-            <!--<password>$REPLACE_WITH_VALID_PASSWORD</password>-->
+            <username>$REPLACE_WITH_VALID_USERNAME</username>
+            <password>$REPLACE_WITH_VALID_PASSWORD</password>
         </server>
     </servers>
 </settings>
